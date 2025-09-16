@@ -3,6 +3,7 @@ package br.com.fiap.pedidos.service;
 import br.com.fiap.pedidos.dto.PedidoDto;
 import br.com.fiap.pedidos.dto.PedidoExibicaoDto;
 import br.com.fiap.pedidos.exception.PedidoNaoEncontradoException;
+import br.com.fiap.pedidos.http.EntregaClient;
 import br.com.fiap.pedidos.model.Pedido;
 import br.com.fiap.pedidos.model.StatusEntrega;
 import br.com.fiap.pedidos.repository.PedidoRepository;
@@ -18,6 +19,21 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private EntregaClient entregaClient;
+
+    public void colocarEmTransporte(Long id){
+        Optional<Pedido> pedidoOptional = pedidoRepository.findById(id);
+
+        if(pedidoOptional.isPresent()){
+            pedidoOptional.get().setStatusEntrega(StatusEntrega.EM_TRANSPORTE);
+            pedidoRepository.save(pedidoOptional.get());
+            entregaClient.atualizaEntrega(pedidoOptional.get().getNumeroPedido());
+        }else {
+            throw new PedidoNaoEncontradoException("Pedido não encontrado");
+        }
+    }
 
     public PedidoExibicaoDto criar(PedidoDto pedidoDto){
 
