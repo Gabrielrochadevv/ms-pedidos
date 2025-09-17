@@ -27,6 +27,8 @@ url -> https://github.com/Gabrielrochadevv/ms-entregas.git
 
 Gerenciamento das entregas dos pedidos
 
+- CRUD de entregas
+
 - Atributos:
 
   - Número da entrega
