@@ -3,7 +3,7 @@
 Este projeto implementa dois microsserviços (Pedidos e Entregas) que se comunicam entre si utilizando Netflix Eureka, Spring Cloud Gateway e OpenFeign, garantindo alta disponibilidade, balanceamento de carga e centralização das requisições.
 
 ## Arquitetura
-Microsserviço de Pedidos
+**Microsserviço de Pedidos**
 
 - CRUD de pedidos
 
@@ -21,7 +21,9 @@ Microsserviço de Pedidos
 
   - Status da entrega
 
- Microsserviço de Entregas
+ **Microsserviço de Entregas**
+ 
+url -> https://github.com/Gabrielrochadevv/ms-entregas.git
 
 Gerenciamento das entregas dos pedidos
 
@@ -89,11 +91,15 @@ docker run --name mysql-microservices -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -
 
 ## Service Discovery (Eureka)
 
+url -> https://github.com/Gabrielrochadevv/service-discovery.git
+
 - Todos os microsserviços se registram no Eureka Server.
 
 - Os clientes consultam o Eureka para localizar dinamicamente os serviços disponíveis.
 
 ## Gateway & Load Balancer
+
+url -> https://github.com/Gabrielrochadevv/gateway.git
 
 - Gateway é o ponto único de entrada para a API.
 
