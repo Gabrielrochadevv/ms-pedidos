@@ -40,6 +40,11 @@ public class OrderController {
         service.delete(orderNumber);
     }
 
+    @GetMapping("{orderNumber}")
+    public ResponseEntity<OrderResponseDto> searchByOrderNumber(@PathVariable Long orderNumber) {
+        return ResponseEntity.ok(service.searchByOrderNumber(orderNumber));
+    }
+
 
 
 }

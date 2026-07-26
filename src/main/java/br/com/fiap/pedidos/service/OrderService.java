@@ -49,4 +49,13 @@ public class OrderService {
         Order order = new Order();
     }
 
+    public OrderResponseDto searchByOrderNumber(Long orderNumber) {
+        Optional<Order> orderOptional = orderRepository.findById(orderNumber);
+
+        if (orderOptional.isPresent()) {
+            return new OrderResponseDto(orderOptional.get());
+        } else {
+            throw new OrderNotFoundException(String.format("Pedido %s não existe!", orderNumber));
+        }
+    }
 }
