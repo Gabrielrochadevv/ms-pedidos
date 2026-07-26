@@ -45,6 +45,16 @@ public class OrderController {
         return ResponseEntity.ok(service.searchByOrderNumber(orderNumber));
     }
 
+    @GetMapping
+    public ResponseEntity<List<OrderResponseDto>> displayAllOrders() {
+        return ResponseEntity.ok(service.displayAllOrders());
+    }
+
+    @PatchMapping("/{id}/transport")
+    public void putInTransport(@PathVariable @NotNull Long id) {
+        service.putInTransport(id);
+    }
+
 
 
 }

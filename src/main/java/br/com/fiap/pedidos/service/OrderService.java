@@ -20,6 +20,8 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    private DeliveryClient deliveryClient;
+
     public OrderResponseDto create(OrderRequestDto orderDto) {
         Order order = new Order();
         BeanUtils.copyProperties(orderDto, order);
@@ -56,6 +58,26 @@ public class OrderService {
             return new OrderResponseDto(orderOptional.get());
         } else {
             throw new OrderNotFoundException(String.format("Pedido %s não existe!", orderNumber));
+        }
+    }
+
+    public List<OrderResponseDto> displayAllOrders() {
+        return orderRepository
+                .findAll()
+                .stream()
+                .map(OrderResponseDto::new)
+                .toList();
+    }
+
+    public void putInTransport(Long id) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+
+        if (orderOptional.isPresent()) {
+            orderOptional.get().setDeliveryStatus(DeliveryStatus.EM_TRANSPORT);
+            orderRepository.save(orderOptional.get());
+            deliveryClient.deliveryUpdate(orderOptional.get().getOrderNumber());
+        } else {
+            throw new OrderNotFoundException("Pedido não encontrado");
         }
     }
 }

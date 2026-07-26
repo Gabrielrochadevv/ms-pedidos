@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 //requisição
 @FeignClient("entregas-ms")
-public interface EntregaClient {
+public interface DeliveryClient {
 
     //pedido de atualização do status do pedido de entrega
     @RequestMapping(method = RequestMethod.PUT, value = "/entregas/{id}/transporte")
-    void atualizaEntrega(@PathVariable Long id);
+    void deliveryUpdate(@PathVariable Long id);
 
 }
