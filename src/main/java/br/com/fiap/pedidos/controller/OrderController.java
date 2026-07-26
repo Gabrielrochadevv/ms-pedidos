@@ -55,6 +55,12 @@ public class OrderController {
         service.putInTransport(id);
     }
 
+    @GetMapping("/port")
+    public ResponseEntity<String> displayPort() {
+        String port = environment.getProperty("local.server.port");
+        String message = String.format("PORTA UTILIZADA NA REQUISIÇÃO: %s", port);
+        return ResponseEntity.ok(message);
+    }
 
 
 }
