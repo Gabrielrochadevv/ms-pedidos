@@ -11,34 +11,34 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tbl_pedidos")
+@Table(name = "tbl_orders")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Pedido {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "numero_pedido")
-    private Long numeroPedido;
+    @Column(name = "order_number")
+    private Long orderNumber;
 
     @NotBlank
     @Size(min = 3, max = 100)
-    @Column(name = "nome_cliente")
-    private String nomeCliente;
+    @Column(name = "client_name")
+    private String clientName;
 
-    @Column(name = "data_pedido")
-    private LocalDate dataPedido;
+    @Column(name = "order_date")
+    private LocalDate orderDate;
 
     @NotNull
     @Positive
-    private BigDecimal valor;
+    private BigDecimal value;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_entrega")
-    private StatusEntrega statusEntrega;
+    @Column(name = "delivery_status")
+    private DeliveryStatus deliveryStatus;
 
 }
