@@ -4,13 +4,14 @@ import br.com.fiap.pedidos.dto.OrderRequestDto;
 import br.com.fiap.pedidos.dto.OrderResponseDto;
 import br.com.fiap.pedidos.exception.OrderNotFoundException;
 import br.com.fiap.pedidos.http.DeliveryClient;
-import br.com.fiap.pedidos.model.Order;
-import br.com.fiap.pedidos.model.DeliveryStatus;
+import br.com.fiap.pedidos.domain.Order;
+import br.com.fiap.pedidos.domain.DeliveryStatus;
 import br.com.fiap.pedidos.repository.OrderRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ public class OrderService {
         BeanUtils.copyProperties(orderDto, order);
 
         order.setDeliveryStatus(DeliveryStatus.IN_SEPARATION);
+        order.setOrderDate(LocalDate.now());
         Order orderCreate = orderRepository.save(order);
 
         return new OrderResponseDto(orderCreate);

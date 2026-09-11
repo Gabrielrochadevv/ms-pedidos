@@ -1,8 +1,6 @@
-package br.com.fiap.pedidos.model;
+package br.com.fiap.pedidos.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -24,21 +22,18 @@ public class Order {
     @Column(name = "order_number")
     private Long orderNumber;
 
-    @NotBlank
     @Size(min = 3, max = 100)
-    @Column(name = "client_name")
+    @Column(name = "client_name", nullable = false)
     private String clientName;
 
-    @Column(name = "order_date")
+    @Column(name = "order_date", nullable = false)
     private LocalDate orderDate;
 
-    @NotNull
     @Positive
+    @Column(nullable = false)
     private BigDecimal value;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "delivery_status")
+    @Column(name = "delivery_status", nullable = false)
     private DeliveryStatus deliveryStatus;
-
 }

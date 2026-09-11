@@ -1,20 +1,22 @@
 package br.com.fiap.pedidos.dto;
 
-import br.com.fiap.pedidos.model.DeliveryStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Getter
 @Setter
 public class OrderRequestDto {
-
-    private Long orderNumber;
+    @NotBlank
     private String clientName;
-    private LocalDate orderDate;
-    private BigDecimal value;
-    private DeliveryStatus deliveryStatus;
 
+    @Schema(description = "Valor total do pedido", example = "25.75")
+    @NotNull
+    @Positive
+    private BigDecimal value;
 }
