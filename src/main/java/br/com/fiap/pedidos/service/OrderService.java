@@ -35,9 +35,12 @@ public class OrderService {
 
     }
 
-    public OrderResponseDto update(OrderRequestDto orderDto) {
-        Order order = new Order();
-        BeanUtils.copyProperties(orderDto, order);
+    public OrderResponseDto update(OrderRequestDto orderDto, Long orderNumber) {
+       Order order = orderRepository.findByOrderNumber(orderNumber)
+               .orElseThrow(() -> new OrderNotFoundException("Pedido não encontrado"));
+
+        order.setClientName(orderDto.getClientName());
+        order.setValue(orderDto.getValue());
         Order updatedOrder = orderRepository.save(order);
         return new OrderResponseDto(updatedOrder);
     }

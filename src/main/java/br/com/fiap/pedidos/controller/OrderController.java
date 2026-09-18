@@ -42,7 +42,7 @@ public class OrderController {
         return service.create(orderDto);
     }
 
-    @PutMapping
+    @PutMapping ("{orderNumber}")
     @Operation(
             summary = "Atualiza um pedido",
             description = "Atualiza os dados de um pedido existente"
@@ -58,8 +58,8 @@ public class OrderController {
                     responseCode = "404",
                     description = "Pedido não encontrado")
     })
-    public OrderResponseDto update(@RequestBody OrderRequestDto orderDto) {
-        return service.update(orderDto);
+    public OrderResponseDto update(@PathVariable Long orderNumber, @RequestBody OrderRequestDto orderDto) {
+        return service.update(orderDto, orderNumber);
     }
 
     @DeleteMapping("{orderNumber}")
